@@ -3,7 +3,7 @@ import { useFiveDays } from './hook/useFiveDays'
 
 export const Fivedays = () => {
 
-  const {dataFive} = useFiveDays()
+  const { dataFive } = useFiveDays()
 
   const options = {
     weekday: "short",
@@ -13,20 +13,20 @@ export const Fivedays = () => {
 
 
   return (
-    <div className="flex flex-col gap-[1rem] text-white  bg-cyan-800 m-auto p-[2rem]">
+    <div className="sm:flex sm:flex-row  grid grid-cols-2 gap-[1.5rem] sm:gap-[2rem] bg-[#100E1D]  p-[1rem] mx-auto mt-[3rem]">
 
-        {(dataFive != '') &&
-          dataFive.map((day => (
-            <div className="flex flex-col" key={day.dt}>
-              <h1>{(day.dt === 'Tomorrow') ? 'Tomorrow' : new Date(day.dt * 1000).toLocaleString('en-GB', options)}</h1>
-              <span>Imagen-°C {day.weather[0].icon}</span>
-              <span>Imagen-°C {day.weather[0].description}</span>
-              <img src={`/images/${day.weather[0].icon}.png`} alt="icon" width={50} />
+      {(dataFive != '') &&
+        dataFive.map((day => (
+          <div className=" bg-[#1E213A] flex flex-col items-center justify-between py-4 w-[150px] h-[207px]" key={day.dt}>
+            <h1>{(day.dt === 'Tomorrow') ? 'Tomorrow' : new Date(day.dt * 1000).toLocaleString('en-GB', options)}</h1>
+            <img src={`/images/${day.weather[0].icon}.png`} alt="icon" width={71} height={77} />
+            <div className="flex flex-row gap-4">
               <span>{day.main.temp_max}</span>
-              <span>{day.main.temp_min}</span>
+              <span className=' text-[#A09FB1]'>{day.main.temp_min}</span>
             </div>
-          )))
-        }
-      </div>
+          </div>
+        )))
+      }
+    </div>
   )
 }

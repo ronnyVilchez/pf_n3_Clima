@@ -5,7 +5,11 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        figma: [ "Raleway", 'sans-serif' ]
+      }
+    },
   },
   plugins: [],
 }

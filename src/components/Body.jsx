@@ -5,10 +5,10 @@ import { NavBody } from './NavBody'
 
 export const Body = () => {
     return (
-        <>
+        <div className='bg-[#100E1D]  p-4 flex flex-col sm:w-[70%]'>
             <NavBody />
             <Fivedays />
             <DetailsToday />
-        </>
+        </div>
     )
 }
