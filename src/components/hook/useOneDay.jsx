@@ -1,18 +1,19 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { FetchCoontext } from '../../context/FetchCoontext'
+import { FilterContext } from '../../context/FilterContext'
 
 export const useOneDay = () => {
 
+    //const{city} = useFilter()
+    const { city } = useContext(FilterContext)
     const [dataDay, setDataDay] = useState([])
-    const  {city}  = useContext(FetchCoontext)
 
-    if(city) {console.log(city)}
+    // if(city) {console.log(city)}
 
     //  const [mood, setMood] = useState('')
-    //const [city, setCity] = useState('')
-    //  const [value, setValue] = useState('')
-  //  const cityw = 'barcelona'
-   // const clim = 'weather'
+    // const [city, setCity] = useState('lima')
+    const [value, setValue] = useState('')
+    //  const cityw = 'barcelona'
+    // const clim = 'weather'
 
     const getDatatwo = async () => {
 
@@ -20,16 +21,20 @@ export const useOneDay = () => {
         const resultday = await rsday.json()
         console.log(resultday);
         setDataDay(resultday)
+
     }
 
 
 
     useEffect(() => {
-        if (city) { getDatatwo() }
+        if (city) {
+            getDatatwo()
+            console.log(city);
+        }
     }, [city])
 
-    /*  const filterCity = (e) => {setValue((e.target.value).toLowerCase())}
-     const searchNow = () => {setCity(value)} */
+    const filterCity = (e) => { setValue((e.target.value).toLowerCase()) }
+    const searchNow = () => { setCity(value) }
 
-    return { dataDay }
+    return { dataDay, filterCity, searchNow, city }
 }

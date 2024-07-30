@@ -2,13 +2,14 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
-import { FetchProvider } from './context/FetchCoontext.jsx'
+import {  FilterProvider } from './context/FilterContext.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <FetchProvider>
-
-      <App />
-    </FetchProvider>
-  </React.StrictMode>,
+//  <React.StrictMode>
+   
+      <FilterProvider>
+        <App />
+      </FilterProvider>
+    
+//  </React.StrictMode>,
 )
