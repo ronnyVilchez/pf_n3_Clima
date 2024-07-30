@@ -1,16 +1,17 @@
 import { useContext, useEffect, useState } from 'react'
 import { FilterContext } from '../../context/FilterContext'
-import { usePosition } from './usePosition'
+import { DegreesContext } from '../../context/DegreesContext'
 
 export const useOneDay = () => {
 
     const { city, setCity } = useContext(FilterContext)
     const [dataDay, setDataDay] = useState([])
     const [value, setValue] = useState('')
+    const { deg } = useContext(DegreesContext)
 
     const getDatatwo = async () => {
         try {
-            const rsday = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=0b792af4110fe18dddb3b844b5ebeafd&units=metric`)
+            const rsday = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city? city : 'helsinki'}&appid=0b792af4110fe18dddb3b844b5ebeafd&${deg? deg : 'units=metric'}`)
             const resultday = await rsday.json()
             setDataDay(resultday)
 
@@ -22,11 +23,11 @@ export const useOneDay = () => {
     }
 
     useEffect(() => {
-        if (city) {
+       
             getDatatwo()
             console.log(city);
-        }
-    }, [city])
+        
+    }, [city,deg])
 
     const filterCity = (e) => { setValue((e.target.value).toLowerCase()) }
     const searchNow = () => { setCity(value) }

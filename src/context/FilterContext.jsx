@@ -1,23 +1,12 @@
 import { createContext, useEffect, useState } from "react";
-import { usePosition } from "../components/hook/usePosition";
 
 export const FilterContext = createContext()
 
 export const FilterProvider = ({ children }) => {
 
-//    const [results, setResults] = useState('')
     const [value, setValue] = useState('')
     const [city, setCity] = useState('helsinki')
-    // const { results } = usePosition()
-
-/*     useEffect(() => {
-        if (results) {
-            const cityPosition = results
-            console.log(cityPosition);
-            setCity(cityPosition)
-        } else { setCity('madrid') }
-    }, []) */
-
+ 
     const filterCity = (e) => { setValue((e.target.value).toLowerCase()) }
     const searchNow = () => { setCity(value) }
 
@@ -34,7 +23,6 @@ export const FilterProvider = ({ children }) => {
                     const resultPosition = await rsPs.json()
                     console.log(resultPosition.name.toLowerCase());
                     setCity(resultPosition.name.toLowerCase())
-                   // setResults(resultPosition.name.toLowerCase());
                 }
                 fetchData()
             }
@@ -42,8 +30,7 @@ export const FilterProvider = ({ children }) => {
 
 
     }
-    // console.log('object');
-    // console.log(results);
+
 
     return (
         <FilterContext.Provider value={{ filterCity, searchNow, city, positionSearch,setCity }}>
