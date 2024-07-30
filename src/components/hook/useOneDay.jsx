@@ -1,30 +1,25 @@
-import React, { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { FilterContext } from '../../context/FilterContext'
+import { usePosition } from './usePosition'
 
 export const useOneDay = () => {
 
-    //const{city} = useFilter()
-    const { city } = useContext(FilterContext)
+    const { city, setCity } = useContext(FilterContext)
     const [dataDay, setDataDay] = useState([])
-
-    // if(city) {console.log(city)}
-
-    //  const [mood, setMood] = useState('')
-    // const [city, setCity] = useState('lima')
     const [value, setValue] = useState('')
-    //  const cityw = 'barcelona'
-    // const clim = 'weather'
 
     const getDatatwo = async () => {
+        try {
+            const rsday = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=0b792af4110fe18dddb3b844b5ebeafd&units=metric`)
+            const resultday = await rsday.json()
+            setDataDay(resultday)
 
-        const rsday = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=0b792af4110fe18dddb3b844b5ebeafd&units=metric`)
-        const resultday = await rsday.json()
-        console.log(resultday);
-        setDataDay(resultday)
+        } catch (error) {
+            setCity('helsinki')
+            alert('Direccion no disponible')
+        }
 
     }
-
-
 
     useEffect(() => {
         if (city) {
