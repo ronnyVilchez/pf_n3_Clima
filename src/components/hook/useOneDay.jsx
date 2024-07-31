@@ -11,7 +11,7 @@ export const useOneDay = () => {
 
     const getDatatwo = async () => {
         try {
-            const rsday = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city? city : 'helsinki'}&appid=0b792af4110fe18dddb3b844b5ebeafd&${deg? deg : 'units=metric'}`)
+            const rsday = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city ? city : 'helsinki'}&appid=0b792af4110fe18dddb3b844b5ebeafd&${deg ? deg : 'units=metric'}`)
             const resultday = await rsday.json()
             setDataDay(resultday)
 
@@ -23,11 +23,10 @@ export const useOneDay = () => {
     }
 
     useEffect(() => {
-       
-            getDatatwo()
-            console.log(city);
-        
-    }, [city,deg])
+
+        getDatatwo()
+
+    }, [city, deg])
 
     const filterCity = (e) => { setValue((e.target.value).toLowerCase()) }
     const searchNow = () => { setCity(value) }

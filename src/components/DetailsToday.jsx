@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useOneDay } from './hook/useOneDay'
+import { DegreesContext } from '../context/DegreesContext'
 
 export const DetailsToday = () => {
 
   const { dataDay } = useOneDay()
-
+  const { metric } = useContext(DegreesContext)
   const wind = (grados) => {
     if (grados > 0 & grados < 22.5) {
       return 'N'
@@ -54,39 +55,42 @@ export const DetailsToday = () => {
     if (grados >= 337.5 & grados < 360) {
       return 'NHW'
     }
-
-
   }
 
   return (
-    <div className="flex flex-col gap-[1rem] w-full bg-[#100E1D] mx-auto sm:mt-[4rem] p-[1rem]">
-      <h2 className='font-semibold text-[24px] sm:ml-[8rem] sm:py-4'>Today’s Hightlights</h2>
+    <div className="flex flex-col gap-[1rem] w-full bg-[#100E1D] mx-auto sm:mt-[1rem] p-[1rem]">
+      <h2 className='font-semibold text-[24px] sm:ml-[4rem] sm:py-4'>Today’s Hightlights</h2>
       {(dataDay != '') &&
-        <div className='flex flex-col gap-8 sm:grid sm:grid-cols-[420px,420px] sm:mx-auto'>
+        <div className='flex flex-col gap-8 sm:grid sm:grid-cols-[328px,328px] sm:mx-auto'>
 
-          <div className='flex flex-col place-content-center p-4 items-center gap-4 bg-[#1E213A]'>
+          <div className='flex flex-col place-content-center p-4 items-center gap-2 bg-[#1E213A]'>
             <h3>Wind status</h3>
-            <h2 className='text-[64px] font-semibold'>{dataDay.wind.speed} <span className='text-[36px] font-normal '>mph</span></h2>
+            <h2 className='text-[64px] font-semibold'>{dataDay.wind.speed} <span className='text-[36px] font-normal '>{metric}</span></h2>
             <div className="flex gap-4 items-center">
               <figure className='flex bg-[#616475] w-10 h-10 rounded-full justify-center'>
-              <img className='' src={'/images/nav.svg'} alt="Icon nav" width={20} style={{ rotate: `${(dataDay.wind.deg)}deg` }} />
+                <img className='' src={'/images/nav.svg'} alt="Icon nav" width={20} style={{ rotate: `${(dataDay.wind.deg)}deg` }} />
               </figure>
               <span>{wind(dataDay.wind.deg)}</span>
             </div>
           </div>
 
-          <div className='flex flex-col place-content-center py-8 px-[3.5rem] items-center gap-4 bg-[#1E213A]'>
+          <div className='flex flex-col place-content-center py-8 px-[3.5rem] items-center gap-2 bg-[#1E213A]'>
             <h3>Humidity</h3>
             <h2 className='text-[64px] font-semibold'>{dataDay.main.humidity} <span className='text-[36px] font-normal'>%</span></h2>
-            <input className='w-full   ' type="range" value={dataDay.main.humidity} max={100} min={0} />
+            <input readOnly className='w-full' list='marks' type="range" value={dataDay.main.humidity} max={100} min={0} />
+            <datalist id='marks'>
+              <option value="0" label="0"></option>
+              <option value="50" label="50"></option>
+              <option value="100" label="100"></option>
+            </datalist>
           </div>
 
-          <div className='flex flex-col place-content-center p-4 items-center gap-4 bg-[#1E213A]'>
+          <div className='flex flex-col place-content-center p-4 items-center gap-2 bg-[#1E213A]'>
             <h3>Visibility</h3>
             <h2 className='text-[64px] font-semibold'>{((dataDay.visibility) === 10000) ? (dataDay.visibility / 1000) : (dataDay.visibility).toLocaleString().slice(0, 3)} <span className='text-[36px] font-normal'>miles</span></h2>
           </div>
 
-          <div className='flex flex-col place-content-center p-4 items-center gap-4 bg-[#1E213A]'>
+          <div className='flex flex-col place-content-center p-4 items-center gap-2 bg-[#1E213A]'>
             <h3>Air Pressure</h3>
             <h2 className='text-[64px] font-semibold'>{dataDay.main.pressure} <span className='text-[36px] font-normal'>mb</span></h2>
           </div>
