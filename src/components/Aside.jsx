@@ -4,7 +4,7 @@ import { Today } from './Today'
 
 export const Aside = () => {
   return (
-    <div className='bg-[#1E213A] sm:w-[30%]'>
+    <div className='bg-[#1E213A] sm:w-[30%] sm:h-screen'>
     <Search/>
     <Today/>
     </div>

@@ -58,14 +58,14 @@ export const DetailsToday = () => {
   }
 
   return (
-    <div className="flex flex-col gap-[1rem] w-full bg-[#100E1D] mx-auto sm:mt-[1rem] p-[1rem]">
+    <div className="flex flex-col flex-wrap shrink gap-[1rem] w-full bg-[#100E1D] mx-auto sm:mt-[1rem] p-[1rem]">
       <h2 className='font-semibold text-[24px] sm:ml-[4rem] sm:py-4'>Today’s Hightlights</h2>
       {(dataDay != '') &&
-        <div className='flex flex-col gap-8 sm:grid sm:grid-cols-[328px,328px] sm:mx-auto'>
+        <div className='flex flex-col sm:shrink gap-8 sm:grid sm:grid-cols-[50%,50%] sm:mx-auto'>
 
-          <div className='flex flex-col place-content-center p-4 items-center gap-2 bg-[#1E213A]'>
+          <div className='flex flex-col sm:shrink place-content-center p-4 items-center gap-2 bg-[#1E213A]'>
             <h3>Wind status</h3>
-            <h2 className='text-[64px] font-semibold'>{dataDay.wind.speed} <span className='text-[36px] font-normal '>{metric}</span></h2>
+            <h2 className='text-[7vh] font-semibold'>{dataDay.wind.speed} <span className='text-[5vh] font-normal '>{metric}</span></h2>
             <div className="flex gap-4 items-center">
               <figure className='flex bg-[#616475] w-10 h-10 rounded-full justify-center'>
                 <img className='' src={'/images/nav.svg'} alt="Icon nav" width={20} style={{ rotate: `${(dataDay.wind.deg)}deg` }} />
@@ -74,25 +74,30 @@ export const DetailsToday = () => {
             </div>
           </div>
 
-          <div className='flex flex-col place-content-center py-8 px-[3.5rem] items-center gap-2 bg-[#1E213A]'>
+          <div className='flex flex-col sm:shrink place-content-center py-8 sm:py-0 px-[3.5rem] items-center gap-2 bg-[#1E213A]'>
             <h3>Humidity</h3>
-            <h2 className='text-[64px] font-semibold'>{dataDay.main.humidity} <span className='text-[36px] font-normal'>%</span></h2>
-            <input readOnly className='w-full' list='marks' type="range" value={dataDay.main.humidity} max={100} min={0} />
-            <datalist id='marks'>
-              <option value="0" label="0"></option>
-              <option value="50" label="50"></option>
-              <option value="100" label="100"></option>
-            </datalist>
+            <h2 className='text-[7vh] font-semibold'>{dataDay.main.humidity} <span className='text-[5vh] font-normal'>%</span></h2>
+            <div className="flex flex-col h-auto w-full">
+              <div className="flex flex-row justify-between">
+                <span>0</span>
+                <span>50</span>
+                <span>100</span>
+              </div>
+              <div className="flex flex-col h-auto w-full rounded-full bg-white">
+
+                <div className="bg-[#FFEC65] rounded-full h-2" style={{ width: `${dataDay.main.humidity}%` }}></div>
+              </div>
+            </div>
           </div>
 
-          <div className='flex flex-col place-content-center p-4 items-center gap-2 bg-[#1E213A]'>
+          <div className='flex flex-col sm:shrink place-content-center p-4 items-center gap-2 bg-[#1E213A]'>
             <h3>Visibility</h3>
-            <h2 className='text-[64px] font-semibold'>{((dataDay.visibility) === 10000) ? (dataDay.visibility / 1000) : (dataDay.visibility).toLocaleString().slice(0, 3)} <span className='text-[36px] font-normal'>miles</span></h2>
+            <h2 className='text-[7vh] font-semibold'>{((dataDay.visibility) === 10000) ? (dataDay.visibility / 1000) : (dataDay.visibility).toLocaleString().slice(0, 3)} <span className='text-[5vh] font-normal'>miles</span></h2>
           </div>
 
-          <div className='flex flex-col place-content-center p-4 items-center gap-2 bg-[#1E213A]'>
+          <div className='flex flex-col sm:shrink place-content-center p-4 items-center gap-2 bg-[#1E213A]'>
             <h3>Air Pressure</h3>
-            <h2 className='text-[64px] font-semibold'>{dataDay.main.pressure} <span className='text-[36px] font-normal'>mb</span></h2>
+            <h2 className='text-[7vh] font-semibold'>{dataDay.main.pressure} <span className='text-[5vh] font-normal'>mb</span></h2>
           </div>
         </div>}
     </div>

@@ -16,7 +16,7 @@ export const Today = () => {
   }
 
   return (
-    <div className={`${modal ? 'hidden' : ''} flex flex-col gap-[1rem] `}>
+    <div className={`${modal ? 'hidden' : ''} flex flex-col gap-[1rem] w-full h-screen `}>
       <div className='flex flex.row justify-between p-[2rem] '>
         <button onClick={modalToday} className='bg-[#6E707A] w-[161px] h-[40px]' >Seach for places</button>
         <div className=" flex bg-[#6E707A] w-[40px] h-[40px] rounded-full items-center justify-center">
@@ -27,16 +27,18 @@ export const Today = () => {
       {
         (dataDay != '') &&
         <div className='flex flex-col'>
-          <div className='flex overflow-hidden w-full relative place-content-center h-[340px]'>
-            <figure className='absolute w-[580px]'>
-              <img className='opacity-5 w-full ' src="/images/Clouds.png" alt="clouds" />
+          <div className='flex overflow-hidden w-full relative place-content-center h-[30vh]'>
+            <figure className='absolute w-[580px] h-100vh'>
+              <img className='opacity-5 w-full h-[30vh] ' src="/images/Clouds.png" alt="clouds" />
             </figure>
 
             <figure className='my-auto'>
-              <img src={`/images/${dataDay.weather[0].icon}.png`} alt="icon" width={150} height={174} />
+              <img src={`/images/${dataDay.weather[0].icon}.png`} alt="icon" className='max-w-full'/>
             </figure>
           </div>
-          <span className='text-[110px] px-[2rem] font-semibold'>{dataDay.main.temp}<span className='text-[48px]  text-[#A09FB1] '>{symbol}</span></span>
+
+          
+          <span className='sm:text-[10vw] text-[11vh] mx-auto font-semibold'>{dataDay.main.temp}<span className='text-[48px]  text-[#A09FB1] '>{symbol}</span></span>
 
           <span className='text-[36px] py-[2rem] text-[#A09FB1] mx-auto'>{dataDay.weather[0].main}</span>
           <div className="flex flex-col px-[2rem] gap-8 items-center mx-auto">

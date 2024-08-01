@@ -6,7 +6,7 @@ export const Search = () => {
     const { filterCity, searchNow, modalToday, modal, valueSearch } = useContext(FilterContext)
 
     return (
-        <div className={`${modal ? '' : 'hidden'} flex-col p-4 mb-[70%] sm:px-8`}>
+        <div className={`${modal ? '' : 'hidden'} flex-col p-4 mb-[70%] sm:h-screen sm:px-8`}>
             <button onClick={modalToday} className='flex ml-auto text-[32px] mb-4'>x</button>
             <div className="flex flex-row w-full justify-between">
                 <div className='flex flex-row gap-4 p-4 w-[268px] sm:w-[265px] h-[50px] border border-[#616475] items-center'>
